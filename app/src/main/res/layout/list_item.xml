@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+  >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="341dp"
+
+        android:adjustViewBounds="true"
+        android:src="@drawable/simonas" />
+
+    <TextView
+        android:id="@+id/text_view_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="11dp"
+        android:text="Martini"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="30dp" />
+
+</LinearLayout>
