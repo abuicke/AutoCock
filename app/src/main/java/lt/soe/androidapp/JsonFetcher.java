@@ -1,4 +1,4 @@
-package lt.soe.autocock.autocockandroidinterface.http;
+package lt.soe.androidapp;
 
 import java.io.IOException;
 

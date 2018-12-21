@@ -1,4 +1,4 @@
-package lt.soe.autocock.autocockandroidinterface;
+package lt.soe.androidapp;
 
 import android.view.LayoutInflater;
 import android.view.View;
