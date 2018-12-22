@@ -1,4 +1,4 @@
-package lt.soe.androidapp;
+package lt.soe.androidapp.cocktail;
 
 import android.support.annotation.NonNull;
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Cocktail {
 
-    static Cocktail TEST_COCKTAIL(String name) {
+    public static Cocktail TEST_COCKTAIL(String name) {
         return new Cocktail(
                 name,
                 "The jimmy whiskey cocktail",

@@ -1,4 +1,4 @@
-package lt.soe.androidapp;
+package lt.soe.androidapp.json;
 
 import android.util.Log;
 

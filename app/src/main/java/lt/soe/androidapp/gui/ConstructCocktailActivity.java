@@ -1,7 +1,11 @@
-package lt.soe.androidapp;
+package lt.soe.androidapp.gui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import lt.soe.androidapp.R;
+import lt.soe.androidapp.cocktail.Cocktail;
+import lt.soe.androidapp.server.JavaServer;
 
 public class ConstructCocktailActivity extends AppCompatActivity {
 

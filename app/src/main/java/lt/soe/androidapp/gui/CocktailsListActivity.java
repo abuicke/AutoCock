@@ -1,9 +1,12 @@
-package lt.soe.androidapp;
+package lt.soe.androidapp.gui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import lt.soe.androidapp.R;
+import lt.soe.androidapp.server.JavaServer;
 
 public class CocktailsListActivity extends AppCompatActivity {
 

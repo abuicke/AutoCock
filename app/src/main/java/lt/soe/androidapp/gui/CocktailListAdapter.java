@@ -1,4 +1,4 @@
-package lt.soe.androidapp;
+package lt.soe.androidapp.gui;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
+
+import lt.soe.androidapp.R;
+import lt.soe.androidapp.cocktail.Cocktail;
 
 public class CocktailListAdapter extends BaseAdapter {
 

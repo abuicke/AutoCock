@@ -1,4 +1,4 @@
-package lt.soe.androidapp;
+package lt.soe.androidapp.server;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -6,6 +6,9 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import lt.soe.androidapp.cocktail.Cocktail;
+import lt.soe.androidapp.json.JsonUtils;
 
 public final class JavaServer {
 

@@ -1,9 +1,11 @@
-package lt.soe.androidapp;
+package lt.soe.androidapp.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
+
+import lt.soe.androidapp.R;
 
 public class SignInActivity extends AppCompatActivity {
 
