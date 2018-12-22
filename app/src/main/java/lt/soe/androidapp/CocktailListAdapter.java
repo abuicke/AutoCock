@@ -11,9 +11,9 @@ import java.util.List;
 public class CocktailListAdapter extends BaseAdapter {
 
     private LayoutInflater _layoutInflater;
-    private List<String> _cocktailNames;
+    private List<Cocktail> _cocktailNames;
 
-    public CocktailListAdapter(LayoutInflater inflater, List<String> cocktailNames) {
+    public CocktailListAdapter(LayoutInflater inflater, List<Cocktail> cocktailNames) {
         _layoutInflater = inflater;
         _cocktailNames = cocktailNames;
     }
@@ -36,7 +36,7 @@ public class CocktailListAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         TextView textView = (TextView) _layoutInflater.inflate(R.layout.list_item, viewGroup, false);
-        textView.setText(_cocktailNames.get(i));
+        textView.setText(_cocktailNames.get(i).name);
         return textView;
     }
 
