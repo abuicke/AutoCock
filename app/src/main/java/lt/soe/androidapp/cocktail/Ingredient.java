@@ -6,14 +6,14 @@ public class Ingredient {
     public int pumpNumber;
     public int pouringOrder;
     public int millilitresInADrink;
-    public double millilitresInAFullBottle;
+    public int millilitresInAFullBottle;
 
     public Ingredient(
             String bottleName,
             int pumpNumber,
             int pouringOrder,
             int millilitresInADrink,
-            double millilitresInAFullBottle
+            int millilitresInAFullBottle
     ) {
         this.bottleName = bottleName;
         this.pumpNumber = pumpNumber;

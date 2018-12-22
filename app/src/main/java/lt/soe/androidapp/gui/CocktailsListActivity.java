@@ -16,9 +16,9 @@ public class CocktailsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         JavaServer javaServer = new JavaServer();
-        javaServer.getCocktails(cocktailNames -> runOnUiThread(() -> {
+        javaServer.getCocktails(cocktails -> runOnUiThread(() -> {
             ListView cocktailsListView = findViewById(R.id.cocktails_list);
-            ListAdapter cocktailListAdapter = new CocktailListAdapter(getLayoutInflater(), cocktailNames);
+            ListAdapter cocktailListAdapter = new CocktailListAdapter(getLayoutInflater(), cocktails);
             cocktailsListView.setAdapter(cocktailListAdapter);
         }));
     }

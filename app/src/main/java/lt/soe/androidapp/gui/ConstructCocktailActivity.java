@@ -14,7 +14,7 @@ public class ConstructCocktailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.construct_cocktail_activity);
 
-        Cocktail cocktail = Cocktail.TEST_COCKTAIL("Jimmy");
+        Cocktail cocktail = Cocktail.TEST_COCKTAIL(System.currentTimeMillis(), "Jimmy");
         new JavaServer().constructCocktail(cocktail);
     }
 }

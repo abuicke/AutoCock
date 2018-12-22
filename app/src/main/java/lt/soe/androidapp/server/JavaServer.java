@@ -1,13 +1,16 @@
 package lt.soe.androidapp.server;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import lt.soe.androidapp.cocktail.Cocktail;
+import lt.soe.androidapp.cocktail.CocktailOrder;
 import lt.soe.androidapp.json.JsonUtils;
 
 public final class JavaServer {
@@ -19,37 +22,53 @@ public final class JavaServer {
     }
 
     public void getCocktails(Listener listener) {
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    List<Cocktail> cocktails = new ArrayList<>();
-                    String jsonStr = JsonUtils.fetchJson(SERVER_URL + "/get_cocktails");
-                    JSONArray cocktailsJsonArray = new JSONArray(jsonStr);
-                    for (int i = 0; i < cocktailsJsonArray.length(); i++) {
-                        String cocktailName = cocktailsJsonArray.getJSONObject(i).getString("name");
-                        Cocktail cocktail = Cocktail.TEST_COCKTAIL(cocktailName);
-                        cocktails.add(cocktail);
-                    }
-                    listener.onCocktailsReceived(cocktails);
-                } catch (JSONException | IOException e) {
-                    throw new IllegalStateException(e);
-                }
+        new Thread(() -> {
+            try {
+                String jsonStr = JsonUtils.fetchJson(SERVER_URL + "/get_cocktails");
+                Type listOfCocktails = new TypeToken<List<Cocktail>>() {
+                }.getType();
+                List<Cocktail> cocktails = new Gson().fromJson(jsonStr, listOfCocktails);
+                listener.onCocktailsReceived(cocktails);
+            } catch (IOException ioe) {
+                throw new IllegalStateException(ioe);
             }
-        }.start();
+        }).start();
     }
 
     public void constructCocktail(Cocktail cocktail) {
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    JsonUtils.postJson(cocktail, SERVER_URL + "/construct_cocktail");
-                } catch (IOException ioe) {
-                    throw new IllegalStateException(ioe);
+        new Thread(() -> {
+            try {
+                ServerResponse serverResponse = JsonUtils.postJson(
+                        cocktail, SERVER_URL + "/construct_cocktail"
+                );
+
+                if (serverResponse.successful) {
+                    Log.i("java_server", serverResponse.message);
+                } else {
+                    Log.i("java_server", serverResponse.message);
                 }
+            } catch (IOException ioe) {
+                throw new IllegalStateException(ioe);
             }
-        }.start();
+        }).start();
+    }
+
+    public void orderCocktail(CocktailOrder cocktailOrder) {
+        new Thread(() -> {
+            try {
+                ServerResponse serverResponse = JsonUtils.postJson(
+                        cocktailOrder, SERVER_URL + "/order_cocktail"
+                );
+
+                if (serverResponse.successful) {
+                    Log.i("java_server", serverResponse.message);
+                } else {
+                    Log.i("java_server", serverResponse.message);
+                }
+            } catch (IOException ioe) {
+                throw new IllegalStateException(ioe);
+            }
+        }).start();
     }
 
 }

@@ -10,25 +10,27 @@ import java.util.List;
 
 import lt.soe.androidapp.R;
 import lt.soe.androidapp.cocktail.Cocktail;
+import lt.soe.androidapp.cocktail.CocktailOrder;
+import lt.soe.androidapp.server.JavaServer;
 
 public class CocktailListAdapter extends BaseAdapter {
 
     private LayoutInflater _layoutInflater;
-    private List<Cocktail> _cocktailNames;
+    private List<Cocktail> _cocktails;
 
-    public CocktailListAdapter(LayoutInflater inflater, List<Cocktail> cocktailNames) {
+    public CocktailListAdapter(LayoutInflater inflater, List<Cocktail> cocktails) {
         _layoutInflater = inflater;
-        _cocktailNames = cocktailNames;
+        _cocktails = cocktails;
     }
 
     @Override
     public int getCount() {
-        return _cocktailNames.size();
+        return _cocktails.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return _cocktailNames.get(i);
+        return _cocktails.get(i);
     }
 
     @Override
@@ -38,8 +40,13 @@ public class CocktailListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        Cocktail cocktail = _cocktails.get(i);
         TextView textView = (TextView) _layoutInflater.inflate(R.layout.list_item, viewGroup, false);
-        textView.setText(_cocktailNames.get(i).name);
+        textView.setText(cocktail.name);
+        textView.setOnClickListener(v -> {
+            CocktailOrder cocktailOrder = new CocktailOrder(cocktail.id);
+            new JavaServer().orderCocktail(cocktailOrder);
+        });
         return textView;
     }
 

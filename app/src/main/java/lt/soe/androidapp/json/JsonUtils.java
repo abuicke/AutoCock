@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import lt.soe.androidapp.server.ServerResponse;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,7 +30,7 @@ public final class JsonUtils {
                 .string();
     }
 
-    public static void postJson(Object object, String url) throws IOException {
+    public static ServerResponse postJson(Object object, String url) throws IOException {
         MediaType jsonMediaType = MediaType.parse("application/json; charset=utf-8");
         String jsonStr = new Gson().toJson(object);
 
@@ -39,9 +40,7 @@ public final class JsonUtils {
                 .post(body)
                 .build();
         Response response = new OkHttpClient().newCall(request).execute();
-        if (response.body() != null) {
-            Log.i(TAG, response.body().string());
-        }
+        return new Gson().fromJson(response.body().string(), ServerResponse.class);
     }
 
 }
