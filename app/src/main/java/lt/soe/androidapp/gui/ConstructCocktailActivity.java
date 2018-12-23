@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import lt.soe.androidapp.R;
 import lt.soe.androidapp.cocktail.Cocktail;
+import lt.soe.androidapp.cocktail.TestCocktails;
 import lt.soe.androidapp.server.JavaServer;
 
 public class ConstructCocktailActivity extends AppCompatActivity {
@@ -14,7 +15,7 @@ public class ConstructCocktailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.construct_cocktail_activity);
 
-        Cocktail cocktail = Cocktail.TEST_COCKTAIL(System.currentTimeMillis(), "Jimmy");
-        new JavaServer().constructCocktail(cocktail);
+        new JavaServer().constructCocktail(TestCocktails.TEST_COCKTAIL_1);
     }
+
 }

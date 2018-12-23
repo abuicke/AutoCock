@@ -7,22 +7,6 @@ import java.util.List;
 
 public class Cocktail {
 
-    public static Cocktail TEST_COCKTAIL(long id, String name) {
-        return new Cocktail(
-                id,
-                name,
-                "The jimmy whiskey cocktail",
-                new ArrayList<Ingredient>() {{
-                    add(new Ingredient(
-                            "Jack Daniels",
-                            1,
-                            1,
-                            35,
-                            700
-                    ));
-                }});
-    }
-
     public long id;
     public String name;
     public String description;
