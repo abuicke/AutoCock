@@ -7,16 +7,17 @@ import android.widget.TextView;
 import lt.soe.androidapp.R;
 import lt.soe.androidapp.server.JavaServer;
 
-public class ConfigurePumpsActivity extends AppCompatActivity {
+public class ViewPumpsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.configure_pumps_activity);
+        setContentView(R.layout.view_pumps_activity);
 
         TextView pumpsConfigurationView = findViewById(R.id.pumps_configuration);
         new JavaServer().getPumpsConfiguration(pumpsConfiguration -> runOnUiThread(() ->
                 pumpsConfigurationView.setText(pumpsConfiguration)
         ));
     }
+
 }

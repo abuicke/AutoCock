@@ -18,7 +18,7 @@ public class SignInActivity extends AppCompatActivity {
         Button noButton = findViewById(R.id.no_button);
 
         yesButton.setOnClickListener(v ->
-                startActivity(new Intent(this, ConstructCocktailActivity.class))
+                startActivity(new Intent(this, AdminActivity.class))
         );
 
         noButton.setOnClickListener(v ->

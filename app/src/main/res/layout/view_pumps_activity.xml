@@ -6,4 +6,9 @@
     android:orientation="vertical"
     tools:context=".gui.SetPumpsActivity">
 
+    <TextView
+        android:id="@+id/pumps_configuration"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

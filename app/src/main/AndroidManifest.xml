@@ -21,8 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gui.ConstructCocktailActivity" />
-        <activity android:name=".gui.ConfigurePumpsActivity"></activity>
+        <activity
+            android:name=".gui.ConstructCocktailActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".gui.SetPumpsActivity" />
+        <activity android:name=".gui.AdminActivity" />
+        <activity android:name=".gui.ViewPumpsActivity" />
     </application>
 
 </manifest>
