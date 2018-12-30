@@ -1,5 +1,6 @@
 package lt.soe.androidapp.gui;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +42,14 @@ public class CocktailListAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         Cocktail cocktail = _cocktails.get(i);
-        TextView textView = (TextView) _layoutInflater.inflate(R.layout.list_item, viewGroup, false);
-        textView.setText(cocktail.name);
-        textView.setOnClickListener(v -> {
+        View listItemView = _layoutInflater.inflate(R.layout.list_item, viewGroup, false);
+        ((TextView) listItemView.findViewById(R.id.cocktail_name)).setText(cocktail.name);
+        ((TextView) listItemView.findViewById(R.id.cocktail_description)).setText(cocktail.description);
+        listItemView.setOnClickListener(v -> {
             CocktailOrder cocktailOrder = new CocktailOrder(cocktail.id);
             new JavaServer().orderCocktail(cocktailOrder);
         });
-        return textView;
+        return listItemView;
     }
 
 }
