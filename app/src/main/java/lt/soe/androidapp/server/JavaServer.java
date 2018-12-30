@@ -35,7 +35,6 @@ public final class JavaServer {
                 String jsonStr = JsonUtils.fetchJson(SERVER_URL + "/get_cocktails");
                 Type listOfCocktails = new TypeToken<List<Cocktail>>() {
                 }.getType();
-                Log.i("mo", "get_cocktails = " + jsonStr);
                 List<Cocktail> cocktails = new Gson().fromJson(jsonStr, listOfCocktails);
                 listener.onCocktailsReceived(cocktails);
             } catch (IOException ioe) {
