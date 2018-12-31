@@ -33,7 +33,6 @@ public final class JsonUtils {
     public static ServerResponse postJson(Object object, String url) throws IOException {
         MediaType jsonMediaType = MediaType.parse("application/json; charset=utf-8");
         String jsonStr = new Gson().toJson(object);
-        Log.i("mo", jsonStr);
 
         RequestBody body = RequestBody.create(jsonMediaType, jsonStr);
         Request request = new Request.Builder()
