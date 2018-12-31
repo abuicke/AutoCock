@@ -19,7 +19,7 @@ import lt.soe.androidapp.pumps.PumpsConfiguration;
 
 public final class JavaServer {
 
-    private static final String SERVER_URL = "http://192.168.0.15:8080";
+    private static final String SERVER_URL = "http://192.168.0.15";
 
     public interface OnCocktailsReceivedListener {
         void onCocktailsReceived(List<Cocktail> cocktails);
