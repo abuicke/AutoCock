@@ -1,7 +1,5 @@
 package lt.soe.androidapp.server;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -19,7 +17,7 @@ import lt.soe.androidapp.pumps.PumpsConfiguration;
 
 public final class JavaServer {
 
-    private static final String SERVER_URL = "http://192.168.0.15";
+    private static final String SERVER_URL = "http://192.168.0.8";
 
     public interface OnCocktailsReceivedListener {
         void onCocktailsReceived(List<Cocktail> cocktails);
@@ -38,7 +36,7 @@ public final class JavaServer {
                 List<Cocktail> cocktails = new Gson().fromJson(jsonStr, listOfCocktails);
                 listener.onCocktailsReceived(cocktails);
             } catch (IOException ioe) {
-                throw new IllegalStateException(ioe);
+                ioe.printStackTrace();
             }
         }).start();
     }
@@ -46,17 +44,9 @@ public final class JavaServer {
     public void constructCocktail(Cocktail cocktail) {
         new Thread(() -> {
             try {
-                ServerResponse serverResponse = JsonUtils.postJson(
-                        cocktail, SERVER_URL + "/construct_cocktail"
-                );
-
-                if (serverResponse.successful) {
-                    Log.i("java_server", serverResponse.message);
-                } else {
-                    Log.i("java_server", serverResponse.message);
-                }
+                JsonUtils.postJson(cocktail, SERVER_URL + "/construct_cocktail");
             } catch (IOException ioe) {
-                throw new IllegalStateException(ioe);
+                ioe.printStackTrace();
             }
         }).start();
     }
@@ -64,17 +54,9 @@ public final class JavaServer {
     public void orderCocktail(CocktailOrder cocktailOrder) {
         new Thread(() -> {
             try {
-                ServerResponse serverResponse = JsonUtils.postJson(
-                        cocktailOrder, SERVER_URL + "/order_cocktail"
-                );
-
-                if (serverResponse.successful) {
-                    Log.i("java_server", serverResponse.message);
-                } else {
-                    Log.i("java_server", serverResponse.message);
-                }
+                JsonUtils.postJson(cocktailOrder, SERVER_URL + "/order_cocktail");
             } catch (IOException ioe) {
-                throw new IllegalStateException(ioe);
+                ioe.printStackTrace();
             }
         }).start();
     }
@@ -84,13 +66,9 @@ public final class JavaServer {
             try {
                 String jsonStr = JsonUtils.fetchJson(SERVER_URL + "/get_pumps_configuration");
 //                PumpsConfiguration pumpsConfiguration = new Gson().fromJson(jsonStr, PumpsConfiguration.class);
-                try {
-                    listener.onPumpsConfigurationReceived(new JSONObject(jsonStr).toString(4));
-                }catch(JSONException jsone) {
-                    jsone.printStackTrace();
-                }
-            } catch (IOException ioe) {
-                throw new IllegalStateException(ioe);
+                listener.onPumpsConfigurationReceived(new JSONObject(jsonStr).toString(4));
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
             }
         }).start();
     }
@@ -98,17 +76,9 @@ public final class JavaServer {
     public void setPumpsConfiguration(PumpsConfiguration pumpsConfiguration) {
         new Thread(() -> {
             try {
-                ServerResponse serverResponse = JsonUtils.postJson(
-                        pumpsConfiguration, SERVER_URL + "/set_pumps_configuration"
-                );
-
-                if (serverResponse.successful) {
-                    Log.i("java_server", serverResponse.message);
-                } else {
-                    Log.i("java_server", serverResponse.message);
-                }
+                JsonUtils.postJson(pumpsConfiguration, SERVER_URL + "/set_pumps_configuration");
             } catch (IOException ioe) {
-                throw new IllegalStateException(ioe);
+                ioe.printStackTrace();
             }
         }).start();
     }
