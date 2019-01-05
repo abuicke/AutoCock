@@ -14,10 +14,10 @@ public class ViewPumpsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_pumps_activity);
 
-//        TextView pumpsConfigurationView = findViewById(R.id.pumps_configuration);
-//        new JavaServer().getPumpsConfiguration(pumpsConfiguration -> runOnUiThread(() ->
-//                pumpsConfigurationView.setText(pumpsConfiguration)
-//        ));
+        TextView pumpsConfigurationView = findViewById(R.id.pumps_configuration);
+        new JavaServer().getPumpsConfiguration(pumpsConfiguration -> runOnUiThread(() ->
+                pumpsConfigurationView.setText(pumpsConfiguration.toString())
+        ));
     }
 
 }
