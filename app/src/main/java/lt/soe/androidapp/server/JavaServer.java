@@ -17,14 +17,14 @@ import lt.soe.androidapp.pumps.PumpsConfiguration;
 
 public final class JavaServer {
 
-    private static final String SERVER_URL = "http://192.168.0.8";
+    private static final String SERVER_URL = "http://192.168.0.15";
 
     public interface OnCocktailsReceivedListener {
         void onCocktailsReceived(List<Cocktail> cocktails);
     }
 
     public interface OnPumpsConfigurationReceivedListener {
-        void onPumpsConfigurationReceived(String pumpsConfiguration);
+        void onPumpsConfigurationReceived(PumpsConfiguration pumpsConfiguration);
     }
 
     public void getCocktails(OnCocktailsReceivedListener listener) {
@@ -65,10 +65,10 @@ public final class JavaServer {
         new Thread(() -> {
             try {
                 String jsonStr = JsonUtils.fetchJson(SERVER_URL + "/get_pumps_configuration");
-//                PumpsConfiguration pumpsConfiguration = new Gson().fromJson(jsonStr, PumpsConfiguration.class);
-                listener.onPumpsConfigurationReceived(new JSONObject(jsonStr).toString(4));
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
+                PumpsConfiguration pumpsConfiguration = new Gson().fromJson(jsonStr, PumpsConfiguration.class);
+                listener.onPumpsConfigurationReceived(pumpsConfiguration);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
             }
         }).start();
     }

@@ -1,11 +1,13 @@
 package lt.soe.androidapp.gui;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -48,6 +50,9 @@ public class CocktailListAdapter extends BaseAdapter {
         listItemView.setOnClickListener(v -> {
             CocktailOrder cocktailOrder = new CocktailOrder(cocktail.id);
             new JavaServer().orderCocktail(cocktailOrder);
+            v.setEnabled(false);
+            v.setBackgroundColor(Color.rgb(192, 192, 192));
+            Toast.makeText(v.getContext(), "Making cocktail...", Toast.LENGTH_LONG).show();
         });
         return listItemView;
     }

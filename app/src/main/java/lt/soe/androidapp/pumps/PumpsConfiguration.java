@@ -7,4 +7,8 @@ public class PumpsConfiguration {
 
     public List<Pump> pumps = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return pumps.toString();
+    }
 }

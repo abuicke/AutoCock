@@ -6,4 +6,13 @@ public class Bottle {
     public int fullBottleVolumeMillilitres;
     public int currentVolumeMillilitres;
 
+    @Override
+    public String toString() {
+        return "Bottle{" +
+                "name='" + name + '\'' +
+                ", fullBottleVolumeMillilitres=" + fullBottleVolumeMillilitres +
+                ", currentVolumeMillilitres=" + currentVolumeMillilitres +
+                '}';
+    }
+    
 }
