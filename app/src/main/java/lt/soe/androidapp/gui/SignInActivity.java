@@ -25,7 +25,7 @@ public class SignInActivity extends AppCompatActivity {
         yesButton.setOnClickListener(v -> {
             View signInDialogView = LayoutInflater.from(this)
                     .inflate(R.layout.sign_in_dialog, null, false);
-            AlertDialog signInDialog = new AlertDialog.Builder(this)
+            new AlertDialog.Builder(this)
                     .setView(signInDialogView)
                     .setPositiveButton("Enter", (dialog, which) -> {
                         EditText passwordView = signInDialogView.findViewById(R.id.password);
