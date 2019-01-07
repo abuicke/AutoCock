@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import lt.soe.androidapp.R;
 import lt.soe.androidapp.pumps.Bottle;
@@ -49,55 +50,59 @@ public class SetPumpsActivity extends AppCompatActivity implements View.OnClickL
         int pumpNumber;
         switch (v.getId()) {
             case R.id.pump_1:
-                pumpNumber = 1;
+                pumpNumber = 0;
                 break;
             case R.id.pump_2:
-                pumpNumber = 2;
+                pumpNumber = 1;
                 break;
             case R.id.pump_3:
-                pumpNumber = 3;
+                pumpNumber = 2;
                 break;
             case R.id.pump_4:
-                pumpNumber = 4;
+                pumpNumber = 3;
                 break;
             case R.id.pump_5:
-                pumpNumber = 5;
+                pumpNumber = 4;
                 break;
             case R.id.pump_6:
-                pumpNumber = 6;
+                pumpNumber = 5;
                 break;
-            default: pumpNumber = -1;
+            default:
+                Toast.makeText(this, "Unrecognised pump number", Toast.LENGTH_SHORT).show();
+                setPumpsView.setVisibility(View.GONE);
+                ingredientNameView.setText("");
+                quantityView.setText("");
+                return;
 
         }
 
-        if (pumpNumber != -1) {
-            setPumpButton.setOnClickListener(v1 -> {
-                String ingredientName = ingredientNameView.getText().toString();
-                int quantity = Integer.valueOf(quantityView.getText().toString());
+        setPumpButton.setOnClickListener(v1 -> {
+            String ingredientName = ingredientNameView.getText().toString();
+            int quantity = Integer.valueOf(quantityView.getText().toString());
 
-                JavaServer javaServer = new JavaServer();
-                javaServer.getPumpsConfiguration(pumpsConfiguration -> {
-                    Pump pump;
-                    if (pumpNumber > pumpsConfiguration.pumps.size()) {
-                        pump = new Pump();
-                        pump.bottle = new Bottle();
-                        pumpsConfiguration.pumps.add(pumpNumber - 1, pump);
-                    } else {
-                        pump = pumpsConfiguration.pumps.get(pumpNumber - 1);
-                    }
-                    pump.bottle.name = ingredientName;
-                    pump.bottle.fullBottleVolumeMillilitres = pump.bottle.currentVolumeMillilitres = quantity;
-                    new JavaServer().setPumpsConfiguration(pumpsConfiguration);
+            JavaServer javaServer = new JavaServer();
+            javaServer.getPumpsConfiguration(pumpsConfiguration -> {
+                Pump pump;
+                if (pumpNumber < pumpsConfiguration.pumps.size()) {
+                    pump = pumpsConfiguration.pumps.get(pumpNumber);
+                } else {
+                    pump = new Pump();
+                    pump.bottle = new Bottle();
+                    pumpsConfiguration.pumps.add(pumpNumber, pump);
+                }
+                pump.bottle.name = ingredientName;
+                pump.bottle.fullBottleVolumeMillilitres = pump.bottle.currentVolumeMillilitres = quantity;
+                new JavaServer().setPumpsConfiguration(pumpsConfiguration);
 
-                    runOnUiThread(() -> {
-                        setPumpsView.setVisibility(View.GONE);
-                        ingredientNameView.setText("");
-                        quantityView.setText("");
-                    });
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Set pump " + (pumpNumber + 1) + " to " + pump.bottle.name, Toast.LENGTH_SHORT).show();
+                    setPumpsView.setVisibility(View.GONE);
+                    ingredientNameView.setText("");
+                    quantityView.setText("");
                 });
             });
-            setPumpsView.setVisibility(View.VISIBLE);
-        }
+        });
+        setPumpsView.setVisibility(View.VISIBLE);
     }
 
 }
