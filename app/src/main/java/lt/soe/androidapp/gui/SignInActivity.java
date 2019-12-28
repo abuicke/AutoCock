@@ -25,19 +25,19 @@ public class SignInActivity extends AppCompatActivity {
         yesButton.setOnClickListener(v -> {
             View signInDialogView = LayoutInflater.from(this)
                     .inflate(R.layout.sign_in_dialog, null, false);
-            new AlertDialog.Builder(this)
-                    .setView(signInDialogView)
-                    .setPositiveButton("Enter", (dialog, which) -> {
-                        EditText passwordView = signInDialogView.findViewById(R.id.password);
-                        String password = passwordView.getText().toString();
-                        if (password.equals("simonas")) {
+//            new AlertDialog.Builder(this)
+//                    .setView(signInDialogView)
+//                    .setPositiveButton("Enter", (dialog, which) -> {
+//                        EditText passwordView = signInDialogView.findViewById(R.id.password);
+//                        String password = passwordView.getText().toString();
+//                        if (password.equals("simonas")) {
                             startActivity(new Intent(this, AdminActivity.class));
-                        } else {
-                            Toast.makeText(this, "Wrong password", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    })
-                    .show();
+//                        } else {
+//                            Toast.makeText(this, "Wrong password", Toast.LENGTH_SHORT).show();
+//                            dialog.dismiss();
+//                        }
+//                    })
+//                    .show();
         });
 
         noButton.setOnClickListener(v ->
