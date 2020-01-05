@@ -2,6 +2,7 @@ package lt.soe.androidapp.gui;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,14 @@ public class CocktailListAdapter extends BaseAdapter {
             v.setEnabled(false);
             v.setBackgroundColor(Color.rgb(192, 192, 192));
             Toast.makeText(v.getContext(), "Making cocktail...", Toast.LENGTH_LONG).show();
+        });
+        listItemView.setLongClickable(true);
+        listItemView.setOnLongClickListener(v -> {
+            Toast.makeText(v.getContext(), "Deleting " + cocktail + "...", Toast.LENGTH_SHORT).show();
+            new JavaServer().deleteCocktail(cocktail);
+            _cocktails.remove(cocktail);
+            notifyDataSetChanged();
+            return true;
         });
         return listItemView;
     }

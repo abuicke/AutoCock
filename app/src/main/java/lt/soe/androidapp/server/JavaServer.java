@@ -61,6 +61,16 @@ public final class JavaServer {
         }).start();
     }
 
+    public void deleteCocktail(Cocktail cocktail) {
+        new Thread(() -> {
+            try {
+                JsonUtils.postJson(cocktail, SERVER_URL + "/delete_cocktail");
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }).start();
+    }
+
     public void getPumpsConfiguration(OnPumpsConfigurationReceivedListener listener) {
         new Thread(() -> {
             try {
